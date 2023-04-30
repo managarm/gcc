@@ -970,6 +970,27 @@ case ${target} in
       ;;
   esac
   ;;
+*-*-managarm*)
+  extra_options="$extra_options gnu-user.opt"
+  gas=yes
+  gnu_ld=yes
+  default_use_cxa_atexit=yes
+  use_gcc_stdint=wrap
+
+  case "${target}" in
+    *-managarm-mlibc*)
+      tmake_file="${tmake_file} t-slibgcc"
+      thread_file=posix
+      ;;
+    *-managarm-kernel*)
+      use_gcc_stdint=provide
+      ;;
+    *)
+      echo "managarm target '${target}' unsupported."
+      exit 1
+      ;;
+  esac
+  ;;
 *-*-netbsd*)
   tm_p_file="${tm_p_file} netbsd-protos.h"
   tmake_file="t-netbsd t-slibgcc"
@@ -1232,6 +1253,24 @@ aarch64*-*-freebsd*)
 	tm_file="${tm_file} aarch64/aarch64-elf.h aarch64/aarch64-errata.h aarch64/aarch64-freebsd.h"
 	tmake_file="${tmake_file} aarch64/t-aarch64 aarch64/t-aarch64-freebsd"
 	tm_defines="${tm_defines}  TARGET_DEFAULT_ASYNC_UNWIND_TABLES=1"
+	;;
+aarch64*-*-managarm*)
+	tm_file="${tm_file} elfos.h gnu-user.h managarm.h glibc-stdint.h"
+	tm_file="${tm_file} aarch64/aarch64-elf.h aarch64/aarch64-managarm.h"
+	tmake_file="${tmake_file} aarch64/t-aarch64 aarch64/t-aarch64-managarm"
+	tm_defines="${tm_defines}  TARGET_DEFAULT_ASYNC_UNWIND_TABLES=1"
+	case ${target} in
+	*-managarm-mlibc*)
+		tm_file="${tm_file} managarm-mlibc.h"
+		;;
+	*-managarm-kernel*)
+		tm_file="${tm_file} managarm-kernel.h"
+		;;
+	*)
+		echo "managarm target '${target}' not supported."
+		exit 1
+	esac
+	TM_MULTILIB_CONFIG="lp64"
 	;;
 aarch64*-*-netbsd*)
 	tm_file="${tm_file} elfos.h ${nbsd_tm_file}"
@@ -1963,6 +2002,24 @@ i[34567]86-*-netbsdelf*)
 	tm_file="${tm_file} i386/unix.h i386/att.h elfos.h ${nbsd_tm_file} i386/netbsd-elf.h"
 	extra_options="${extra_options} netbsd.opt netbsd-elf.opt"
 	;;
+x86_64-*-managarm*)
+	tm_file="${tm_file} i386/unix.h i386/att.h elfos.h gnu-user.h glibc-stdint.h \
+		 i386/x86-64.h i386/gnu-user-common.h i386/gnu-user64.h managarm.h i386/i386-managarm.h"
+
+	case ${target} in
+	*-managarm-mlibc*)
+		tmake_file="${tmake_file} i386/t-managarm64"
+		tm_file="${tm_file} managarm-mlibc.h"
+		;;
+	*-managarm-kernel*)
+		tm_file="${tm_file} managarm-kernel.h"
+		tmake_file="${tmake_file} t-slibgcc i386/t-managarm-kernel64"
+		;;
+	*)
+		echo "managarm target '${target}' not supported."
+		exit 1
+	esac
+	;;
 x86_64-*-netbsd*)
 	tm_file="${tm_file} i386/unix.h i386/att.h elfos.h ${nbsd_tm_file} i386/x86-64.h i386/netbsd64.h"
 	extra_options="${extra_options} netbsd.opt netbsd-elf.opt"
@@ -2546,6 +2603,23 @@ riscv*-*-freebsd*)
 	# automatically detect that GAS supports it, yet we require it.
 	gcc_cv_initfini_array=yes
 	with_tls=${with_tls:-trad}
+	;;
+
+riscv*-*-managarm*)
+	tm_file="${tm_file} elfos.h gnu-user.h managarm.h glibc-stdint.h"
+	tm_file="${tm_file} riscv/managarm.h"
+	tmake_file="${tmake_file} riscv/t-riscv riscv/t-managarm"
+	case ${target} in
+	*-managarm-mlibc*)
+		tm_file="${tm_file} managarm-mlibc.h"
+		;;
+	*-managarm-kernel*)
+		tm_file="${tm_file} managarm-kernel.h"
+		;;
+	*)
+		echo "managarm target '${target}' not supported."
+		exit 1
+	esac
 	;;
 
 loongarch*-*-linux*)

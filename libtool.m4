@@ -2568,6 +2568,16 @@ linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu* | uclinuxfdpiceabi)
   dynamic_linker='GNU/Linux ld.so'
   ;;
 
+managarm*)
+  version_type=linux
+  need_lib_prefix=no
+  need_version=no
+  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
+  soname_spec='${libname}${release}${shared_ext}$major'
+  shlibpath_var=LD_LIBRARY_PATH
+  hardcode_into_libs=yes
+  ;;
+
 netbsd*)
   version_type=sunos
   need_lib_prefix=no
@@ -3183,6 +3193,10 @@ irix5* | irix6* | nonstopux*)
 
 # This must be Linux ELF.
 linux* | k*bsd*-gnu | kopensolaris*-gnu | uclinuxfdpiceabi)
+  lt_cv_deplibs_check_method=pass_all
+  ;;
+
+managarm*)
   lt_cv_deplibs_check_method=pass_all
   ;;
 
