@@ -299,7 +299,7 @@ dnl # functions in the list guarded by
 dnl # long_double_math_on_this_cpu in configure.ac, right after
 dnl # the expansion of the present macro.
     ;;
-  *-managarm*)
+  *-mlibc*)
     GLIBCXX_CHECK_COMPILER_FEATURES
     GLIBCXX_CHECK_LINKER_FEATURES
     GLIBCXX_CHECK_MATH_SUPPORT
