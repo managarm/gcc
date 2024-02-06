@@ -475,6 +475,7 @@ aarch64*-*-managarm*)
 	tmake_file="${tmake_file} ${cpu_type}/t-aarch64"
 	tmake_file="${tmake_file} ${cpu_type}/t-lse t-slibgcc-libgcc"
 	tmake_file="${tmake_file} ${cpu_type}/t-softfp t-softfp t-crtfm"
+	tmake_file="${tmake_file} t-dfprules"
 	;;
 aarch64*-*-vxworks7*)
 	extra_parts="$extra_parts crtfastmath.o"
