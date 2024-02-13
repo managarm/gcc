@@ -321,7 +321,7 @@ case ${host} in
       ;;
   esac
   tmake_file="$tmake_file t-crtstuff-pic"
-  tmake_file="$tmake_file t-slibgcc t-slibgcc-gld t-slibgcc-elf-ver t-libgcc-pic i386/t-linux"
+  tmake_file="$tmake_file t-slibgcc t-slibgcc-gld t-slibgcc-elf-ver t-libgcc-pic"
   ;;
 *-*-lynxos*)
   tmake_file="$tmake_file t-lynx $cpu_type/t-crtstuff t-crtstuff-pic t-libgcc-pic"
@@ -808,6 +808,7 @@ i[34567]86-*-linux*)
 x86_64-*-managarm*)
 	extra_parts="$extra_parts crtprec32.o crtprec64.o crtprec80.o crtfastmath.o"
 	tmake_file="$tmake_file i386/t-crtpc t-crtfm i386/t-crtstuff t-dfprules"
+	tmake_file="$tmake_file i386/t-linux"
 	;;
 i[34567]86-*-kfreebsd*-gnu | i[34567]86-*-kopensolaris*-gnu)
 	extra_parts="$extra_parts crtprec32.o crtprec64.o crtprec80.o crtfastmath.o"
