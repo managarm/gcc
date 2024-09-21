@@ -16449,6 +16449,10 @@ linux* | k*bsd*-gnu | kopensolaris*-gnu | uclinuxfdpiceabi)
   lt_cv_deplibs_check_method=pass_all
   ;;
 
+managarm*)
+  lt_cv_deplibs_check_method=pass_all
+  ;;
+
 netbsd*)
   if echo __ELF__ | $CC -E - | $GREP __ELF__ > /dev/null; then
     lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|_pic\.a)$'
@@ -20861,6 +20865,16 @@ linux*oldld* | linux*aout* | linux*coff*)
   dynamic_linker=no
   ;;
 
+managarm* | linux*-mlibc*)
+  version_type=linux
+  need_lib_prefix=no
+  need_version=no
+  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
+  soname_spec='${libname}${release}${shared_ext}$major'
+  shlibpath_var=LD_LIBRARY_PATH
+  hardcode_into_libs=yes
+  ;;
+
 # This must be Linux ELF.
 
 # uclinux* changes (here and below) have been submitted to the libtool
@@ -21575,7 +21589,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 21578 "configure"
+#line 21592 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -21681,7 +21695,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 21684 "configure"
+#line 21698 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -24585,6 +24599,16 @@ irix5* | irix6* | nonstopux*)
 # No shared lib support for Linux oldld, aout, or coff.
 linux*oldld* | linux*aout* | linux*coff*)
   dynamic_linker=no
+  ;;
+
+managarm* | linux*-mlibc*)
+  version_type=linux
+  need_lib_prefix=no
+  need_version=no
+  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
+  soname_spec='${libname}${release}${shared_ext}$major'
+  shlibpath_var=LD_LIBRARY_PATH
+  hardcode_into_libs=yes
   ;;
 
 # This must be Linux ELF.
