@@ -5137,6 +5137,7 @@ case "${target}" in
 
 		case ${target} in
 		  *-linux-gnu*) triplet_os="linux-gnu";;
+		  *-linux-mlibc*) triplet_os="linux-mlibc";;
 		  *-linux-musl*) triplet_os="linux-musl";;
 		  *-elf*) triplet_os="elf";;
 		  *)
